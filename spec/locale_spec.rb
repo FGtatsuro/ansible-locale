@@ -1,17 +1,17 @@
 require "spec_helper_#{ENV['SPEC_TARGET_BACKEND']}"
 
-describe package('python-dev'), :if => ['debian', 'alpine'].include?(os[:family]) do
+describe package('locale'), :if => os[:family] == 'debian' do
   it { should be_installed }
 end
 
-describe package('build-essential'), :if => os[:family] == 'debian' do
-  it { should be_installed }
+describe command('which locale') do
+  its(:exit_status) { should eq 0 }
 end
 
-describe package('build-base'), :if => os[:family] == 'alpine' do
-  it { should be_installed }
+describe command('which locale-gen') do
+  its(:exit_status) { should eq 0 }
 end
 
-describe command('which python') do
+describe command('update-locale') do
   its(:exit_status) { should eq 0 }
 end
