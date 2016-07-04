@@ -1,2 +1,16 @@
 ---
 # tasks file for locale(On Debian family)
+- name: Install locale with APT
+  apt: name=locales update_cache=yes cache_valid_time=3600 install_recommends=no
+  become: yes
+- name: Generate locale
+  locale_gen: name="{{ locale_set_locale }}"
+  become: yes
+- name: Check default locale
+  command: cat /etc/default/locale
+  register: result_default_locale
+  changed_when: no
+- name: Update locale
+  command: update-locale LANG="{{ locale_set_locale }}" LC_ALL="{{ locale_set_locale }}"
+  when: locale_set_locale not in result_default_locale.stdout
+  become: yes

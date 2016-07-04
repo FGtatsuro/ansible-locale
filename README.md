@@ -17,6 +17,10 @@ Role Variables
 
 The variables we can use in this role.
 
+|name|description|default|
+|---|---|---|
+|locale_set_locale|Locale this role sets in target environment.|en_US.UTF-8|
+
 Role Dependencies
 -----------------
 
