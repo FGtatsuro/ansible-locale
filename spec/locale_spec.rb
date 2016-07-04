@@ -1,6 +1,6 @@
 require "spec_helper_#{ENV['SPEC_TARGET_BACKEND']}"
 
-describe package('locale'), :if => os[:family] == 'debian' do
+describe package('locales'), :if => os[:family] == 'debian' do
   it { should be_installed }
 end
 
