@@ -3,3 +3,6 @@
 - name: Install locale with APT
   apt: name=locales update_cache=yes cache_valid_time=3600 install_recommends=no
   become: yes
+- name: Generate locale
+  locale_gen: name="{{ locale_set_locale }}"
+  become: yes
